@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentýnská pozvánka 💘</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            overflow: hidden; /* Zabrání scrollování, když tlačítko utíká */
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            z-index: 1;
+            max-width: 90%;
+        }
+
+        h1 {
+            color: #d63384;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        button {
+            font-size: 18px;
+            font-weight: bold;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        #yes {
+            background-color: #ff4d6d;
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 77, 109, 0.4);
+        }
+
+        #yes:hover {
+            transform: scale(1.1);
+        }
+
+        #no {
+            background-color: #777;
+            color: white;
+            position: fixed; /* Fixed zajistí, že může lítat kdekoli */
+            transition: all 0.2s ease;
+            z-index: 999;
+            touch-action: none; /* Důležité pro mobily */
+        }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h1>💌 Půjdeš se mnou na valentýnku? 💌</h1>
+    <div class="buttons">
+        <button id="yes">ANO 💖</button>
+        </div>
+</div>
+
+<button id="no">NE 💔</button>
+
+<script>
+    const noBtn = document.getElementById("no");
+    const yesBtn = document.getElementById("yes");
+
+    function moveNoButton() {
+        // Výpočet bezpečné oblasti (šířka okna minus šířka tlačítka)
+        const maxX = window.innerWidth - noBtn.offsetWidth;
+        const maxY = window.innerHeight - noBtn.offsetHeight;
+
+        const x = Math.random() * maxX;
+        const y = Math.random() * maxY;
+
+        noBtn.style.left = x + "px";
+        noBtn.style.top = y + "px";
+    }
+
+    // Pro počítače (myš)
+    noBtn.addEventListener("mouseover", moveNoButton);
+
+    // Pro mobilní telefony (dotyk)
+    noBtn.addEventListener("touchstart", function(e) {
+        e.preventDefault(); // Zabrání kliknutí při prvním doteku
+        moveNoButton();
+    });
+
+    // Co se stane po kliknutí na ANO
+    yesBtn.addEventListener("click", () => {
+        document.body.innerHTML = `
+            <div style="
+                display:flex;
+                flex-direction: column;
+                align-items:center;
+                justify-content:center;
+                height:100vh;
+                width: 100vw;
+                font-family:Arial;
+                text-align:center;
+                background:linear-gradient(135deg,#ff9a9e,#fad0c4);
+            ">
+                <h1 style="font-size: 3rem; color: white; text-shadow: 2px 2px 10px rgba(0,0,0,0.2);">
+                    💖 Jooo! Už se nemůžu dočkat 😍<br>
+                    Valentýnka je domluvená 💕
+                </h1>
+                <div style="font-size: 5rem;">🌹🥂✨</div>
+            </div>
+        `;
+    });
+
+    // Počáteční náhodná pozice, aby nebylo hned vedle ANO
+    moveNoButton();
+</script>
+
+</body>
+</html>
