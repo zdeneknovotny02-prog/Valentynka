@@ -66,7 +66,6 @@
             touch-action: none;
         }
 
-        /* Styl pro tvůj vzkaz v rohu */
         .disclaimer {
             position: fixed;
             bottom: 10px;
@@ -74,13 +73,14 @@
             font-size: 10px;
             color: rgba(0, 0, 0, 0.4);
             font-style: italic;
-            pointer-events: none; /* Aby text nepřekážel při klikání */
+            pointer-events: none;
+            z-index: 1000;
         }
     </style>
 </head>
 <body>
 
-<div class="card">
+<div class="card" id="mainCard">
     <h1>💌 Budeš moje Valentýnka? 💌</h1>
     <div class="buttons">
         <button id="yes">ANO 💖</button>
@@ -89,11 +89,12 @@
 
 <button id="no">NE 💔</button>
 
-<div class="disclaimer">Poznámka: Výběr jiné možnosti než "ANO" není technicky podporován.</div>
+<div class="disclaimer" id="footerNote">Poznámka: Výběr jiné možnosti než "ANO" není technicky podporován.</div>
 
 <script>
     const noBtn = document.getElementById("no");
     const yesBtn = document.getElementById("yes");
+    const footerNote = document.getElementById("footerNote");
 
     function moveNoButton() {
         const maxX = window.innerWidth - noBtn.offsetWidth;
@@ -111,6 +112,7 @@
     });
 
     yesBtn.addEventListener("click", () => {
+        // Změna hlavního obsahu
         document.body.innerHTML = `
             <div style="
                 display:flex;
@@ -128,6 +130,9 @@
                     Valentýnka je domluvená 💕
                 </h1>
                 <div style="font-size: 5rem;">🌹🥂✨</div>
+                <div style="position: fixed; bottom: 10px; right: 15px; font-size: 10px; color: rgba(255,255,255,0.6); font-style: italic;">
+                    Systém potvrzuje: Volba byla učiněna zcela dobrovolně a bez nátlaku. 😉
+                </div>
             </div>
         `;
     });
