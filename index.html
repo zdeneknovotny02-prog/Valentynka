@@ -13,7 +13,7 @@
             align-items: center;
             justify-content: center;
             margin: 0;
-            overflow: hidden; /* Zabrání scrollování, když tlačítko utíká */
+            overflow: hidden;
         }
 
         .card {
@@ -55,57 +55,61 @@
             box-shadow: 0 4px 15px rgba(255, 77, 109, 0.4);
         }
 
-        #yes:hover {
-            transform: scale(1.1);
-        }
+        #yes:hover { transform: scale(1.1); }
 
         #no {
             background-color: #777;
             color: white;
-            position: fixed; /* Fixed zajistí, že může lítat kdekoli */
+            position: fixed;
             transition: all 0.2s ease;
             z-index: 999;
-            touch-action: none; /* Důležité pro mobily */
+            touch-action: none;
+        }
+
+        /* Styl pro tvůj vzkaz v rohu */
+        .disclaimer {
+            position: fixed;
+            bottom: 10px;
+            right: 15px;
+            font-size: 10px;
+            color: rgba(0, 0, 0, 0.4);
+            font-style: italic;
+            pointer-events: none; /* Aby text nepřekážel při klikání */
         }
     </style>
 </head>
 <body>
 
 <div class="card">
-    <h1>💌 Půjdeš se mnou na valentýnku? 💌</h1>
+    <h1>💌 Budeš moje Valentýnka? 💌</h1>
     <div class="buttons">
         <button id="yes">ANO 💖</button>
-        </div>
+    </div>
 </div>
 
 <button id="no">NE 💔</button>
+
+<div class="disclaimer">Poznámka: Výběr jiné možnosti než "ANO" není technicky podporován.</div>
 
 <script>
     const noBtn = document.getElementById("no");
     const yesBtn = document.getElementById("yes");
 
     function moveNoButton() {
-        // Výpočet bezpečné oblasti (šířka okna minus šířka tlačítka)
         const maxX = window.innerWidth - noBtn.offsetWidth;
         const maxY = window.innerHeight - noBtn.offsetHeight;
-
         const x = Math.random() * maxX;
         const y = Math.random() * maxY;
-
         noBtn.style.left = x + "px";
         noBtn.style.top = y + "px";
     }
 
-    // Pro počítače (myš)
     noBtn.addEventListener("mouseover", moveNoButton);
-
-    // Pro mobilní telefony (dotyk)
     noBtn.addEventListener("touchstart", function(e) {
-        e.preventDefault(); // Zabrání kliknutí při prvním doteku
+        e.preventDefault();
         moveNoButton();
     });
 
-    // Co se stane po kliknutí na ANO
     yesBtn.addEventListener("click", () => {
         document.body.innerHTML = `
             <div style="
@@ -128,7 +132,6 @@
         `;
     });
 
-    // Počáteční náhodná pozice, aby nebylo hned vedle ANO
     moveNoButton();
 </script>
 
