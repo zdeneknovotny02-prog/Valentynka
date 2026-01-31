@@ -80,7 +80,7 @@
 </head>
 <body>
 
-<div class="card" id="mainCard">
+<div class="card">
     <h1>💌 Budeš moje Valentýnka? 💌</h1>
     <div class="buttons">
         <button id="yes">ANO 💖</button>
@@ -89,12 +89,11 @@
 
 <button id="no">NE 💔</button>
 
-<div class="disclaimer" id="footerNote">Poznámka: Výběr jiné možnosti než "ANO" není technicky podporován.</div>
+<div class="disclaimer">Poznámka: Výběr jiné možnosti než "ANO" není technicky podporován.</div>
 
 <script>
     const noBtn = document.getElementById("no");
     const yesBtn = document.getElementById("yes");
-    const footerNote = document.getElementById("footerNote");
 
     function moveNoButton() {
         const maxX = window.innerWidth - noBtn.offsetWidth;
@@ -112,7 +111,6 @@
     });
 
     yesBtn.addEventListener("click", () => {
-        // Změna hlavního obsahu
         document.body.innerHTML = `
             <div style="
                 display:flex;
@@ -124,14 +122,25 @@
                 font-family:Arial;
                 text-align:center;
                 background:linear-gradient(135deg,#ff9a9e,#fad0c4);
+                padding: 20px;
+                box-sizing: border-box;
             ">
-                <h1 style="font-size: 3rem; color: white; text-shadow: 2px 2px 10px rgba(0,0,0,0.2);">
+                <h1 style="font-size: 3rem; color: white; text-shadow: 2px 2px 10px rgba(0,0,0,0.2); margin: 0;">
                     💖 Jooo! Už se nemůžu dočkat 😍<br>
                     Valentýnka je domluvená 💕
                 </h1>
-                <div style="font-size: 5rem;">🌹🥂✨</div>
-                <div style="position: fixed; bottom: 10px; right: 15px; font-size: 10px; color: rgba(255,255,255,0.6); font-style: italic;">
-                    Systém potvrzuje: Volba byla učiněna zcela dobrovolně a bez nátlaku. 😉
+                <div style="font-size: 5rem; margin-top: 20px;">🌹🥂✨</div>
+                
+                <div style="
+                    position: fixed; 
+                    bottom: 15px; 
+                    right: 20px; 
+                    font-size: 11px; 
+                    color: rgba(255, 255, 255, 0.8); 
+                    font-style: italic;
+                    text-align: right;
+                ">
+                    Systém potvrzuje: Volba byla učiněna zcela dobrovolně,<br>svobodně a bez jakéhokoliv technického nátlaku. 😉
                 </div>
             </div>
         `;
